@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#
+products = Product.create([{title: "The Minimal Entrepreneurs"}, {title: "The Good, Bad, and Ugly"}])
+Review.create([{stars: 1, body: "bad", product_id: products.first.id},
+               {stars: 5, body: "good", product_id: products.first.id},
+               {stars: 1, body: "bad", product_id: products.second.id},
+               {stars: 5, body: "good", product_id: products.second.id}
+])
