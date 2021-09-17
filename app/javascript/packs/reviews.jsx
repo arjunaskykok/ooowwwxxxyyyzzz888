@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
+import RatingAverage from './rating_avg'
+
 function ProductReviews(props) {
 
   const [title, setTitle] = useState();
+  const [rating_average, setRatingAverage] = useState();
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`/products/info/${props.product_id}`);
       const data = await response.json(response);
-      setTitle(data["title"])
+      setTitle(data["title"]);
+      setRatingAverage(data["rating_average"]);
     }
     fetchData()
   }, [props])
@@ -19,6 +23,8 @@ function ProductReviews(props) {
     <div className="container">
       <div className="content">
         <h1>{title}</h1>
+        <RatingAverage rating_number={rating_average} />
+
         <hr/>
 
         <h2>Reviews</h2>
