@@ -6,6 +6,9 @@
     <div class="rating">
       <div class="rating-inner">
         <div class="rating-number"><%= @ratings_average %></div>
+        <div class="rating-stars">
+          <%= print_stars(@ratings_average) %>
+        </div>
       </div>
     </div>
 
@@ -17,6 +20,7 @@
       <% @reviews.each do |review| %>
       <div class="review-row">
         <div class="review-row-stars">
+          <%= print_stars(review.stars) %>
         </div>
         <div class="review-row-number">
           <%= review.stars %>

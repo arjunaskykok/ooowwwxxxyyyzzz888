@@ -1,5 +1,13 @@
+$yellow_star: #fecd6d;
+
 body {
   font-family: 'Roboto';
+}
+
+.fa-star, .fa-star-half {
+  color: $yellow_star;
+  font-size: 1.2em;
+  height: 1em;
 }
 
 .container {
@@ -8,5 +16,28 @@ body {
 
   .content {
     margin-top: 2em;
+
+    .rating {
+      margin-top: 1.8em;
+      margin-bottom: 2.2em;
+      font-weight: 400;
+      display: flex;
+      justify-content: space-between;
+
+      .rating-inner {
+        display: flex;
+
+        .rating-number {
+          font-size: 1.6em;
+        }
+
+        .rating-stars {
+          margin-left: 1em;
+          .fa-star, .fa-star-half {
+            vertical-align: -0.45em;
+          }
+        }
+      }
+    }
   }
 }
