@@ -17,3 +17,17 @@ Run the app like this:
 * Open htttp://localhost:3000
 
 * Enjoy!
+
+Big architectural decisions I've made:
+
+* Using websockets for pushing real-time updates
+
+* Using event dispatcher to bridge between vanilla JS and React
+
+* Using SVG for stars instead of unicode or PNG because manipulating SVG
+  is easier
+
+* Avoiding Redux because it's not needed
+
+
+After working on the challenge, I think next time I would use TypeScript. Then I would use UUID instead of ID. Finally, I would use a slug on the URL.
