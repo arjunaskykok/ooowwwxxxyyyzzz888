@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 
 import RatingAverage from './rating_avg'
 import Loading from './loading'
+import ListOfReviews from './list_of_reviews'
 
 function ProductReviews(props) {
 
   const [title, setTitle] = useState();
   const [rating_average, setRatingAverage] = useState();
+  const [allreviews, setReviews] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -15,6 +17,7 @@ function ProductReviews(props) {
       const data = await response.json(response);
       setTitle(data["title"]);
       setRatingAverage(data["rating_average"]);
+      setReviews(data["reviews"])
     }
     fetchData()
   }, [props])
@@ -31,6 +34,7 @@ function ProductReviews(props) {
 
           <h2>Reviews</h2>
 
+          <ListOfReviews allreviews={allreviews} />
         </div>
 
       </div>
