@@ -4,12 +4,14 @@ import ReactDOM from 'react-dom';
 import RatingAverage from './rating_avg'
 import Loading from './loading'
 import ListOfReviews from './list_of_reviews'
+import SubmitReviewForm from './submit_review_form'
 
 function ProductReviews(props) {
 
   const [title, setTitle] = useState();
   const [rating_average, setRatingAverage] = useState();
   const [allreviews, setReviews] = useState();
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,7 +30,7 @@ function ProductReviews(props) {
       <div className="container">
         <div className="content">
           <h1>{title}</h1>
-          <RatingAverage rating_number={rating_average} />
+          <RatingAverage rating_number={rating_average} setShowModal={setShowModal} />
 
           <hr/>
 
@@ -38,6 +40,7 @@ function ProductReviews(props) {
         </div>
 
       </div>
+      {showModal ? <SubmitReviewForm stars={ 3 } product_id={ props.product_id } setShowModal={setShowModal} /> : null }
     </Suspense>
    </div>
   )

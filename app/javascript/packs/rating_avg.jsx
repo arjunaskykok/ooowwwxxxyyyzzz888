@@ -12,7 +12,7 @@ export default function RatingAverage(props) {
         </div>
       </div>
       <div className="add-review">
-        <button className="review-button" id="add-review">
+        <button className="review-button" id="add-review" onClick={() => props.setShowModal(true) }>
           Add review
         </button>
       </div>
