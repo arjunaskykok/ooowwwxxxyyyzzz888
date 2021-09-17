@@ -5,8 +5,6 @@ class ProductsController < ApplicationController
 
   def reviews
     @product = Product.find(params[:id])
-    @ratings_average = Review.where(product_id: @product.id).average(:stars).round(2)
-    @reviews = @product.reviews.order(created_at: :desc)
   end
 
   def submit_review
@@ -24,7 +22,12 @@ class ProductsController < ApplicationController
 
   def product_info
     product = Product.find(params[:id])
-    rating_average = Review.where(product_id: product.id).average(:stars).round(2)
+    average = Review.where(product_id: product.id).average(:stars)
+    if average then
+      rating_average = average.round(2)
+    else
+      rating_average = 0
+    end
     reviews = product.reviews.order(created_at: :desc)
     reviews_json = []
     reviews.each {|r|
