@@ -40,7 +40,7 @@ function ProductReviews(props) {
         </div>
 
       </div>
-      {showModal ? <SubmitReviewForm stars={ 3 } product_id={ props.product_id } setShowModal={setShowModal} /> : null }
+      {showModal ? <SubmitReviewForm stars={ 3 } product_id={ props.product_id } setShowModal={setShowModal} token={props.token} /> : null }
     </Suspense>
    </div>
   )

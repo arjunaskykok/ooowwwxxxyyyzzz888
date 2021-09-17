@@ -8,6 +8,34 @@ function turnOffModal(setShowModal, event) {
   }
 }
 
+function submitReview(setShowModal, stars_value, body_value, product_id, token) {
+  let rating = {
+    stars: stars_value,
+    body: body_value,
+    product_id: product_id,
+    authenticity_token: token
+  };
+  let option = {
+    method: "POST",
+    body: JSON.stringify(rating),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  fetch("/products/submit-review", option)
+    .then(response => {
+      if (response.status >= 200 && response.status <= 299) {
+        return response.json()
+      } else {
+        throw Error(response.statusText)
+      }
+    })
+    .then(res => {setShowModal(false)})
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
 export default function SubmitReviewForm(props) {
   const [stars, setStars] = useState(props.stars)
   const [body, setBody] = useState()
@@ -37,7 +65,8 @@ export default function SubmitReviewForm(props) {
       <input type="text" id="review-body" name="review-body" onChange={updateBody} placeholder="Start typing...." />
     </div>
     <div className="form-input">
-      <button className="review-button submit-review" id="submit-review">
+      <button className="review-button submit-review" id="submit-review"
+              onClick={() => submitReview(props.setShowModal, stars, body, props.product_id, props.token)}>
         Submit review
       </button>
     </div>
