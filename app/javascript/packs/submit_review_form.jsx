@@ -25,7 +25,7 @@ export default function SubmitReviewForm(props) {
     </div>
     <div className="form-input">
       <div className="rating-stars" id="rating-input">
-        <Stars num={ stars } />
+        <Stars num={ stars } setStars={setStars} />
       </div>
       <input type="hidden" id="review-stars" name="review-stars" value={ stars } />
       <input type="hidden" id="review-product_id" name="review-product_id" value={props.product_id}  />
