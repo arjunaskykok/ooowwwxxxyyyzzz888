@@ -53,5 +53,34 @@ body {
         }
       }
     }
+
+    .add-review {
+      margin-top: -0.2em;
+    }
+
+    h2 {
+      margin-top: 1.2em;
+      margin-bottom: 1em;
+      font-weight: 700;
+      margin-left: -1%;
+    }
+
+    #reviews-list {
+      margin-left: -1%;
+    }
+
+    .review-row {
+      display: flex;
+      margin-bottom: 1.6em;
+
+      .review-row-number {
+        margin-left: 1em;
+        font-weight: 500;
+      }
+
+      .review-row-text {
+        color: $button_text;
+      }
+    }
   }
 }
