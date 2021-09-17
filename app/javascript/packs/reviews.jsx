@@ -6,7 +6,7 @@ import Loading from './loading'
 import ListOfReviews from './list_of_reviews'
 import SubmitReviewForm from './submit_review_form'
 
-const container = document.body;
+var container;
 
 function ProductReviews(props) {
 
@@ -50,11 +50,19 @@ function ProductReviews(props) {
   )
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function setUpReact() {
+  container = document.body;
+
   let product_id = document.getElementById("product_id").innerHTML;
   let authenticity_token = document.getElementById("authenticity_token").value;
   ReactDOM.render(
     <ProductReviews product_id={product_id} token={authenticity_token} />,
     document.getElementById("root"),
   )
-})
+}
+
+if (document.readyState !== 'loading') {
+  setUpReact();
+} else {
+  document.addEventListener('DOMContentLoaded', setUpReact);
+}
