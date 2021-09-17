@@ -1,4 +1,4 @@
 class Review < ApplicationRecord
   belongs_to :product
-  validates :stars, :inclusion => 1..5
+  validates :stars, :inclusion => [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
 end
