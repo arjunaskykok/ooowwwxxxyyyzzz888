@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   get "/products/:id", to: "products#reviews", as: 'reviews'
 
+  post "/products/submit-review", to: "products#submit_review", as: 'submit_review'
+
 end

@@ -6,7 +6,45 @@ window.addEventListener('DOMContentLoaded', (event) => {
   modal_background.addEventListener("click", hideReviewForm);
 
   setUpIdsForStars();
+
+  let submit_review_button = document.getElementById("submit-review");
+  submit_review_button.addEventListener("click", submitReview);
 });
+
+function submitReview(event) {
+  let stars_value = document.getElementById("review-stars").value;
+  let body_value = document.getElementById("review-body").value;
+  let product_id = document.getElementById("review-product_id").value;
+  let token = document.getElementById("authenticity_token").value;
+  let rating = {
+    stars: stars_value,
+    body: body_value,
+    product_id: product_id,
+    authenticity_token: token
+  };
+  let option = {
+    method: "POST",
+    body: JSON.stringify(rating),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  fetch("/products/submit-review", option)
+    .then(response => {
+      if (response.status >= 200 && response.status <= 299) {
+        return response.json()
+      } else {
+        throw Error(response.statusText)
+      }
+    })
+    .then(res => {
+      document.getElementById("review-form").style.display = "none";
+      window.location.reload(false);
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+}
 
 function loadUpReviewForm() {
   let add_review_form = document.getElementById("review-form");

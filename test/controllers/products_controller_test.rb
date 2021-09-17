@@ -17,4 +17,12 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_match "good", @response.body
     assert_match "3", @response.body
   end
+
+  test "should post review" do
+    product = products(:one)
+    post submit_review_url(product), params: { stars: 3, body: 'hmmmm', product_id: product.id }, xhr: true
+    assert_response :created
+    assert_match "hmmm", @response.body
+    assert_equal Review.where(body: 'hmmmm').size(), 1
+  end
 end
