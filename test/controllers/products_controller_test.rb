@@ -1,4 +1,5 @@
 require "test_helper"
+require "json"
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
@@ -24,5 +25,18 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_response :created
     assert_match "hmmm", @response.body
     assert_equal Review.where(body: 'hmmmm').size(), 1
+  end
+
+  test "should get product and its review" do
+    product = products(:one)
+    get product_reviews_url(product)
+    assert_response :success
+    json_result = JSON.parse(@response.body)
+    assert_equal "Product1", json_result["title"]
+    assert_equal 3.0, json_result["rating_average"].to_f
+    review1 = {"stars" => 2, "body" => "bad"}
+    review2 = {"stars" => 4, "body" => "good"}
+    assert_equal review1, json_result["reviews"][0]
+    assert_equal review2, json_result["reviews"][1]
   end
 end

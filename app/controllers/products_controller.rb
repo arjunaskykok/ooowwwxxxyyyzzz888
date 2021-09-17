@@ -20,4 +20,23 @@ class ProductsController < ApplicationController
       render json: rating.errors, status: :unprocessable_entity
     end
   end
+
+  def product_info
+    product = Product.find(params[:id])
+    rating_average = Review.where(product_id: product.id).average(:stars).round(2)
+    reviews = product.reviews.order(created_at: :desc)
+    reviews_json = []
+    reviews.each {|r|
+      reviews_json.append({
+        "stars": r.stars,
+        "body": r.body
+      })
+    }
+    result = {
+      "title": product.title,
+      "rating_average": rating_average,
+      "reviews": reviews_json
+    }
+    render json: result, status: :ok
+  end
 end

@@ -6,7 +6,12 @@ function ProductReviews(props) {
   const [title, setTitle] = useState();
 
   useEffect(() => {
-    setTitle("Product title")
+    async function fetchData() {
+      const response = await fetch(`/products/info/${props.product_id}`);
+      const data = await response.json(response);
+      setTitle(data["title"])
+    }
+    fetchData()
   }, [props])
 
   return (
