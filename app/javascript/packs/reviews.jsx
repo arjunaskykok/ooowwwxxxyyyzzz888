@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 
 import RatingAverage from './rating_avg'
+import Loading from './loading'
 
 function ProductReviews(props) {
 
@@ -20,19 +21,20 @@ function ProductReviews(props) {
 
   return (
    <div>
-    <div className="container">
-      <div className="content">
-        <h1>{title}</h1>
-        <RatingAverage rating_number={rating_average} />
+     <Suspense fallback={<Loading />}>
+      <div className="container">
+        <div className="content">
+          <h1>{title}</h1>
+          <RatingAverage rating_number={rating_average} />
 
-        <hr/>
+          <hr/>
 
-        <h2>Reviews</h2>
+          <h2>Reviews</h2>
+
+        </div>
 
       </div>
-
-    </div>
-
+    </Suspense>
    </div>
   )
 }
