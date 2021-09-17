@@ -1,10 +1,12 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 
 import RatingAverage from './rating_avg'
 import Loading from './loading'
 import ListOfReviews from './list_of_reviews'
 import SubmitReviewForm from './submit_review_form'
+
+const container = document.body;
 
 function ProductReviews(props) {
 
@@ -13,14 +15,16 @@ function ProductReviews(props) {
   const [allreviews, setReviews] = useState();
   const [showModal, setShowModal] = useState(false);
 
+  async function fetchData() {
+    const response = await fetch(`/products/info/${props.product_id}`);
+    const data = await response.json(response);
+    setTitle(data["title"]);
+    setRatingAverage(data["rating_average"]);
+    setReviews(data["reviews"])
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`/products/info/${props.product_id}`);
-      const data = await response.json(response);
-      setTitle(data["title"]);
-      setRatingAverage(data["rating_average"]);
-      setReviews(data["reviews"])
-    }
+    container.addEventListener("refresh", fetchData);
     fetchData()
   }, [props])
 

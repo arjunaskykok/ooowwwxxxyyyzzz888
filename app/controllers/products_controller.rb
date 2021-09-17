@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
     product_id = params[:product_id]
     rating = Review.new(stars: stars, body: body, product_id: product_id)
     if rating.save
+      ActionCable.server.broadcast("reviews_info", { body: "update" })
       render json: rating, status: :created
     else
       render json: rating.errors, status: :unprocessable_entity
