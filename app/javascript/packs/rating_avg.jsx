@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 
+import Stars from './stars';
 
 export default function RatingAverage(props) {
   return (
@@ -7,6 +8,7 @@ export default function RatingAverage(props) {
       <div className="rating-inner">
         <div className="rating-number">{ props.rating_number }</div>
         <div className="rating-stars">
+          <Stars num={ props.rating_number } />
         </div>
       </div>
       <div className="add-review">
