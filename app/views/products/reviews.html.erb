@@ -41,4 +41,31 @@
   </div>
 </div>
 
+<div id="review-form" class="modal">
+  <div class="modal-content">
+    <h3>What's your rating?</h3>
+    <div class="form-label">
+      Rating
+    </div>
+    <div class="form-input">
+      <div class="rating-stars" id="rating-input">
+        <%= print_stars(3) %>
+      </div>
+      <input type="hidden" id="review-stars" name="review-stars" value="3" />
+      <input type="hidden" id="review-product_id" name="review-product_id" value="<%= @product.id %>" />
+    </div>
+    <div class="form-label">
+      Review
+    </div>
+    <div class="form-input">
+      <input type="text" id="review-body" name="review-body" placeholder="Start typing...." />
+    </div>
+    <div class="form-input">
+      <button class="review-button submit-review" id="submit-review">
+        Submit review
+      </button>
+    </div>
+  </div>
+</div>
+
 <%= javascript_pack_tag 'products' %>
