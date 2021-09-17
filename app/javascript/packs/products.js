@@ -4,6 +4,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   let modal_background = document.getElementById("review-form");
   modal_background.addEventListener("click", hideReviewForm);
+
+  setUpIdsForStars();
 });
 
 function loadUpReviewForm() {
@@ -14,5 +16,36 @@ function loadUpReviewForm() {
 function hideReviewForm(event) {
   if (event.target.id=="review-form") {
     event.target.style.display = "none";
+  }
+}
+
+function setUpIdsForStars() {
+  let children = document.getElementById("rating-input").children;
+  for (var i=0; i<children.length; i++) {
+    children[i].setAttribute("id", "star-" + (i+1).toString());
+    children[i].addEventListener("click", function(event) {
+      var svg = null;
+      if (event.target.nodeName=="path") {
+        svg = event.target.parentElement;
+      } else {
+        svg = event.target;
+      }
+      let id = svg.id;
+      let arr = id.split("-");
+      let num = parseInt(arr[1]);
+      changeStarRating(num);
+    });
+  }
+}
+
+function changeStarRating(num) {
+  document.getElementById("review-stars").value = num;
+  var filledColor = "currentColor";
+  var emptyColor = "#e0e0e0";
+  for (var i=1; i<=num; i++) {
+    document.getElementById("star-" + i.toString()).children[0].setAttribute("fill", filledColor);
+  }
+  for (var i=num+1; i<=5; i++) {
+    document.getElementById("star-" + i.toString()).children[0].setAttribute("fill", emptyColor);
   }
 }
